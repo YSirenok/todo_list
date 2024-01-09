@@ -1,8 +1,7 @@
-// lib/widgets/todo_entry.dart
 import 'package:flutter/material.dart';
 import '../models/todo_task.dart';
 
-class TodoEntry extends StatefulWidget {
+class TodoEntry extends StatelessWidget {
   final TodoTask task;
   final Function(bool) onCheckboxChanged;
 
@@ -10,29 +9,24 @@ class TodoEntry extends StatefulWidget {
       {super.key, required this.task, required this.onCheckboxChanged});
 
   @override
-  TodoEntryState createState() => TodoEntryState();
-}
-
-class TodoEntryState extends State<TodoEntry> {
-  @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        widget.task.taskName,
+        task.taskName,
         style: TextStyle(
-          decoration: widget.task.isCompleted
+          decoration: task.isCompleted
               ? TextDecoration.lineThrough
               : TextDecoration.none,
         ),
       ),
       leading: Checkbox(
-        value: widget.task.isCompleted,
+        value: task.isCompleted,
         onChanged: (value) {
-          widget.onCheckboxChanged(value!);
+          onCheckboxChanged(value!);
         },
       ),
       onTap: () {
-        widget.onCheckboxChanged(!widget.task.isCompleted);
+        onCheckboxChanged(!task.isCompleted);
       },
     );
   }
